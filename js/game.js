@@ -1,12 +1,20 @@
 /* global Phaser */
 
-// Copyright (c) 2020 Mr. Coxall All rights reserved
+// Copyright (c) 2022 Emma Janani All rights reserved
 //
 // Created by: Emma Janani
 // Created on: June 2022
 // This is the Phaser3 configuration file
 
-//* Game scene */
+// scene import statements
+import SplashScene from './splashScene.js'
+
+// create the new scenes
+const splashScene = new SplashScene()
+
+/**
+ * Start Phaser Game.
+ */
 const config = {
   type: Phaser.AUTO,
   width: 1920, 
@@ -18,7 +26,7 @@ const config = {
     }
   },
   // set background color
-  backgroundColor: 0x5f2e8a,
+  backgroundColor: 0x749de3,
   scale: {
     mode: Phaser.Scale.FIT,
     // we place it in the middle of the page.
@@ -27,4 +35,11 @@ const config = {
 }
 
 const game = new Phaser.Game(config)
-console.log(game)
+// console.log(game)
+
+// load scenes
+// NOTE: remember any "key" is global and CAN NOT be reused! 
+game.scene.add('splashScene', splashScene)
+
+// the start scene
+game.scene.add('splashScene')
