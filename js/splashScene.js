@@ -15,6 +15,7 @@ class SplashScene extends Phaser.Scene {
     */
   constructor () {
     super({ key: 'splashScene' })
+    this.splashSceneBackgroundImage = null
   }
 
   /**
@@ -24,7 +25,7 @@ class SplashScene extends Phaser.Scene {
    * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   init (data) {
-    this.cameras.main.setBackgroundColor('#000000')
+    this.cameras.main.setBackgroundColor('#ffffff')
   }
 
   /**
@@ -33,7 +34,7 @@ class SplashScene extends Phaser.Scene {
    */
   preload() {
     console.log('Splash Scene')
-    this.load.image('splashSceneBackground', './images/immaculatacrest.jpeg')
+    this.load.image('splashSceneBackground', '../images/immaculatacrest.jpeg')
   }
 
   /**
