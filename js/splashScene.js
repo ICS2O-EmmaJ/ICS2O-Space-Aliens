@@ -4,7 +4,7 @@
 //
 // Modified by: Emma Janani
 // Created on: June 2022
-// This is the Splash Scene
+// This is the Splash Scene 
 
 /** 
   * This class is the Splash Scene.
@@ -24,7 +24,7 @@ class SplashScene extends Phaser.Scene {
    * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   init (data) {
-    this.cameras.main.setBackgroundColor('#ffffff')
+    this.cameras.main.setBackgroundColor('#000000')
   }
 
   /**
@@ -33,6 +33,7 @@ class SplashScene extends Phaser.Scene {
    */
   preload() {
     console.log('Splash Scene')
+    this.load.image('splashSceneBackground', './images/immaculatacrest.jpeg')
   }
 
   /**
@@ -41,7 +42,9 @@ class SplashScene extends Phaser.Scene {
    * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   create (data) {
-    // pass
+    this.splashSceneBackgroundImage = this.add.sprite(0, 0, 'splashSceneBackground')
+    this.splashSceneBackgroundImage.x = 1920 / 2
+    this.splashSceneBackgroundImage.y = 1080 / 2
   }
 
   /** 
@@ -51,7 +54,9 @@ class SplashScene extends Phaser.Scene {
    *  @param {number} delta - The delta time in ms since the last frame.
    */
   update (time, delta) {
-    this.scene.switch('titleScene')
+    if (time > 3000) {
+      this.scene.switch('titleScene')
+    }
   }
 }
 
