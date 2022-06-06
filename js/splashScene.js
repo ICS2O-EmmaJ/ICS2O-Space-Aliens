@@ -25,7 +25,7 @@ class SplashScene extends Phaser.Scene {
    * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   init (data) {
-    this.cameras.main.setBackgroundColor('#ffffff')
+    this.cameras.main.setBackgroundColor("#FFFFFF")
   }
 
   /**
@@ -33,7 +33,7 @@ class SplashScene extends Phaser.Scene {
    * Use it to load assets.
    */
   preload() {
-    console.log('Splash Scene')
+    console.log("Splash Scene")
     this.load.image('splashSceneBackground', '../images/immaculatacrest.jpeg')
   }
 
@@ -43,7 +43,7 @@ class SplashScene extends Phaser.Scene {
    * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   create (data) {
-    this.splashSceneBackgroundImage = this.add.sprite(0, 0, 'splashSceneBackground')
+    this.splashSceneBackgroundImage = this.add.sprite(0, 0, 'splashSceneBackground').setScale(2)
     this.splashSceneBackgroundImage.x = 1920 / 2
     this.splashSceneBackgroundImage.y = 1080 / 2
   }
@@ -56,7 +56,7 @@ class SplashScene extends Phaser.Scene {
    */
   update (time, delta) {
     if (time > 3000) {
-      this.scene.switch('titleScene')
+      this.scene.switch("titleScene")
     }
   }
 }
