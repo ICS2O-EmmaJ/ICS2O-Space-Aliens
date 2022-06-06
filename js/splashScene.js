@@ -15,6 +15,7 @@ class SplashScene extends Phaser.Scene {
     */
   constructor () {
     super({ key: 'splashScene' })
+    
     this.splashSceneBackgroundImage = null
   }
 
@@ -25,7 +26,7 @@ class SplashScene extends Phaser.Scene {
    * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   init (data) {
-    this.cameras.main.setBackgroundColor("#FFFFFF")
+    this.cameras.main.setBackgroundColor("#365b9c")
   }
 
   /**
@@ -55,7 +56,7 @@ class SplashScene extends Phaser.Scene {
    *  @param {number} delta - The delta time in ms since the last frame.
    */
   update (time, delta) {
-    if (time > 3000) {
+    if (time > 3500) {
       this.scene.switch("titleScene")
     }
   }

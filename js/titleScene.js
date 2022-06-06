@@ -15,7 +15,6 @@ class TitleScene extends Phaser.Scene {
     */
   constructor () {
     super({ key: "titleScene" })
-    this.titleSceneBackgroundImage = null
   }
 
   /**
@@ -25,7 +24,7 @@ class TitleScene extends Phaser.Scene {
    * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   init (data) {
-    this.cameras.main.setBackgroundColor("#ffffff")
+    this.cameras.main.setBackgroundColor("#365b9c")
   }
 
   /**
@@ -34,7 +33,6 @@ class TitleScene extends Phaser.Scene {
    */
   preload() {
     console.log("Title Scene")
-    this.load.image("titleSceneBackground", "../images/sky.jpeg")
   }
 
   /**
@@ -43,10 +41,6 @@ class TitleScene extends Phaser.Scene {
    * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   create (data) {
-    this.titleSceneBackgroundImage = this.add.sprite(0, 0, "titleSceneBackground")
-    this.titleSceneBackgroundImage.x = 1920 / 2
-    this.titleSceneBackgroundImage.y = 1080 / 2
-    // pass
   }
 
   /** 

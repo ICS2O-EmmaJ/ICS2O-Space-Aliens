@@ -27,7 +27,7 @@ const config = {
       debug: true
     }
   },
-  // set background color to blue
+  // set background color to white.
   backgroundColor: 0xffffff,
   scale: {
     mode: Phaser.Scale.FIT,
