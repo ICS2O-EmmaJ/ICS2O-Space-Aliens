@@ -15,6 +15,9 @@ class GameScene extends Phaser.Scene {
     */
   constructor () {
     super({ key: "gameScene" })
+
+    this.background = null
+    this.ship = null
   }
 
   /**
@@ -24,7 +27,7 @@ class GameScene extends Phaser.Scene {
    * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   init (data) {
-    this.cameras.main.setBackgroundColor("#365b9c")
+    this.cameras.main.setBackgroundColor("#ffffff")
   }
 
   /**
@@ -32,7 +35,11 @@ class GameScene extends Phaser.Scene {
    * Use it to load assets.
    */
   preload() {
-    console.log("Game Scene")
+    console.log('Game Scene')
+
+    // images
+    this.load.image('starBackground', '../images/skybackground.jpg')
+    this.load.image('ship', '../images/flowerpot.webp')
   }
 
   /**
@@ -41,6 +48,10 @@ class GameScene extends Phaser.Scene {
    * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   create (data) {
+    this.background = this.add.image(0, 0, 'starBackground').setScale(1.2)
+    this.background.setOrigin(0, 0)
+
+    this.ship = this.physics.add.sprite(1920 /2, 1080 - 100, 'ship').setScale(0.2)
   }
 
   /** 
