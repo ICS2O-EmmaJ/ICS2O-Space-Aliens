@@ -40,6 +40,7 @@ class GameScene extends Phaser.Scene {
     // images
     this.load.image('starBackground', '../images/skybackground.jpg')
     this.load.image('ship', '../images/flowerpot.webp')
+    this.load.image('missile', '../images/')
   }
 
   /**
