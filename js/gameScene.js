@@ -39,9 +39,9 @@ class GameScene extends Phaser.Scene {
     console.log('Game Scene')
 
     // images
-    this.load.image('starBackground', '../images/skybackground.jpg')
-    this.load.image('ship', '../images/flowerpot.webp')
-    this.load.image('missile', '../images/flowerpower.gif')
+    this.load.image('starBackground', '../images/gamebackground.jpg')
+    this.load.image('ship', '../images/mermaidsprite.png')
+    this.load.image('missile', '../images/seashellmissile.png')
   }
 
   /**
@@ -50,10 +50,10 @@ class GameScene extends Phaser.Scene {
    * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   create (data) {
-    this.background = this.add.image(0, 0, 'starBackground').setScale(1.0)
+    this.background = this.add.image(0, 0, 'starBackground').setScale(1)
     this.background.setOrigin(0, 0)
 
-    this.ship = this.physics.add.sprite(1920 / 2, 1080 - 320, 'ship').setScale(0.2)
+    this.ship = this.physics.add.sprite(1920 / 2, 1080 - 220, 'ship').setScale(0.35)
 
     // create a group for the missiles
     this.missileGroup = this.physics.add.group()
@@ -90,7 +90,7 @@ class GameScene extends Phaser.Scene {
       if (this.fireMissile === false) {
         // fire missile
         this.fireMissile = true
-        const aNewMissile = this.physics.add.sprite(this.ship.x, this.ship.y, 'missile')
+        const aNewMissile = this.physics.add.sprite(this.ship.x, this.ship.y, 'missile').setScale(0.15)
         this.missileGroup.add(aNewMissile)
       }
     }

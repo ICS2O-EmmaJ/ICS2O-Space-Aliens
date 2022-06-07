@@ -18,7 +18,7 @@ class TitleScene extends Phaser.Scene {
     
     this.titleSceneBackgroundImage = null
     this.titleSceneText = null
-    this.titleSceneTextStyle = { font: '150px Times', fill: '#fde4b9', align: 'center' }
+    this.titleSceneTextStyle = { font: '80px Times', fill: '#ffffff', align: 'center' }
   }
 
   /**
@@ -37,7 +37,7 @@ class TitleScene extends Phaser.Scene {
    */
   preload() {
     console.log('Title Scene')
-    this.load.image('titleSceneBackground', '../images/flowerbackground.jpg')
+    this.load.image('titleSceneBackground', '../images/titlebackground.jpg')
   }
 
   /**
@@ -46,11 +46,11 @@ class TitleScene extends Phaser.Scene {
    * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   create (data) {
-    this.titleSceneBackgroundImage = this.add.sprite(0, 0, 'titleSceneBackground').setScale(1.6)
+    this.titleSceneBackgroundImage = this.add.sprite(0, 0, 'titleSceneBackground').setScale(1.4)
     this.titleSceneBackgroundImage.x = 1920 / 2
     this.titleSceneBackgroundImage.y = 1080 / 2
 
-    this.titleSceneText = this.add.text(1000, 200, 'FLOWER POWER', this.titleSceneTextStyle).setOrigin(0.5)
+    this.titleSceneText = this.add.text(1400, 500, 'MAGIC MERMAID', this.titleSceneTextStyle).setOrigin(0.5)
   }
 
   /** 
