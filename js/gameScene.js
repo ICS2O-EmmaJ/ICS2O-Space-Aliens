@@ -30,6 +30,12 @@ class GameScene extends Phaser.Scene {
     this.background = null
     this.mermaid = null
     this.fireSeashell = false
+    this.score = 0
+    this.scoreText = null
+    this.scoreTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' }
+
+    this.gameOverText = null
+    this.gameOverTextStyle = { font: '65px Arial', fill: '#ff00000', align: 'center' }
   }
 
   /**
@@ -68,6 +74,8 @@ class GameScene extends Phaser.Scene {
     this.background = this.add.image(0, 0, 'oceanBackground').setScale(1)
     this.background.setOrigin(0, 0)
 
+    this.scoreText = this.add.text(10, 10, 'Score: ' + this.score.toString(), this.scoreTextStyle)
+
     this.mermaid = this.physics.add.sprite(1920 / 2, 1080 - 220, 'mermaid').setScale(0.35)
 
     // create a group for the seashells
@@ -82,8 +90,21 @@ class GameScene extends Phaser.Scene {
       sharkCollide.destroy()
       seashellCollide.destroy()
       this.sound.play('growl')
+      this.score = this.score + 1
+      this.scoreText.setText('Score: ' + this.score.toString())
       this.createShark()
-    }.bind(this))
+     }.bind(this))
+
+    // collisions between mermaid and sharks
+    this.physics.add.collider(this.mermaid, this.sharkGroup, function (mermaidCollide, sharkCollide) {
+      this.sound.play('gameOver')
+      this.physics.pause()
+      sharkCollide.destroy()
+      mermaidCollide.destroy()
+      this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
+      this.gameOverText.setInteractive({ useHandCursor: true })
+      this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
+     }.bind(this))
   }
 
   /** 
