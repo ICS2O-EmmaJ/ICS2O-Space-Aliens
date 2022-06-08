@@ -42,6 +42,8 @@ class GameScene extends Phaser.Scene {
     this.load.image('starBackground', '../images/gamebackground.jpg')
     this.load.image('ship', '../images/mermaidsprite.png')
     this.load.image('missile', '../images/seashellmissile.png')
+    // sound
+    this.load.audio('seashell', '../sounds/seashellsound.wav')
   }
 
   /**
@@ -92,12 +94,20 @@ class GameScene extends Phaser.Scene {
         this.fireMissile = true
         const aNewMissile = this.physics.add.sprite(this.ship.x, this.ship.y, 'missile').setScale(0.15)
         this.missileGroup.add(aNewMissile)
+        this.sound.play('seashell')
       }
     }
 
     if (keySpaceObj.isUp === true) {
       this.fireMissile = false
     }
+
+    this.missileGroup.children.each(function (item) {
+      item.y = item.y - 15
+      if (item.y < 0) {
+        item.destroy()
+      }
+    })
   }
 }
 
