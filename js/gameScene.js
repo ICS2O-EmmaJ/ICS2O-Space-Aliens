@@ -10,6 +10,17 @@
   * This class is the Game Scene.
   */
 class GameScene extends Phaser.Scene {
+  // create a shark
+  createShark () {
+    const sharkXLocation = Math.floor(Math.random() * 1920) + 1 // this will get a number between 1 and 1920
+    let sharkXVelocity = Math.floor(Math.random() * 50) + 1 // this will get a number between 1 and 50
+    sharkXVelocity *= Math.round(Math.random()) ? 1 : -1 // this will add minus sign in 50% of cases
+    const aShark = this.physics.add.sprite(sharkXLocation, -100, 'shark').setScale(0.1)
+    aShark.body.velocity.y = 200
+    aShark.body.velocity.x = sharkXVelocity
+    this.sharkGroup.add(aShark)
+  }
+  
    /**
     * This method is the constructor. 
     */
@@ -42,6 +53,7 @@ class GameScene extends Phaser.Scene {
     this.load.image('starBackground', '../images/gamebackground.jpg')
     this.load.image('ship', '../images/mermaidsprite.png')
     this.load.image('missile', '../images/seashellmissile.png')
+    this.load.image('shark', '../images/shark.png')
     // sound
     this.load.audio('seashell', '../sounds/seashellsound.wav')
   }
@@ -59,6 +71,10 @@ class GameScene extends Phaser.Scene {
 
     // create a group for the missiles
     this.missileGroup = this.physics.add.group()
+
+    // create a group for the sharks
+    this.sharkGroup = this.add.group()
+    this.createShark()
   }
 
   /** 
