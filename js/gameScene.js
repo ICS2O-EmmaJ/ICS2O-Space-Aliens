@@ -28,8 +28,8 @@ class GameScene extends Phaser.Scene {
     super({ key: "gameScene" })
 
     this.background = null
-    this.ship = null
-    this.fireMissile = false
+    this.mermaid = null
+    this.fireSeashell = false
   }
 
   /**
@@ -50,12 +50,13 @@ class GameScene extends Phaser.Scene {
     console.log('Game Scene')
 
     // images
-    this.load.image('starBackground', '../images/gamebackground.jpg')
-    this.load.image('ship', '../images/mermaidsprite.png')
-    this.load.image('missile', '../images/seashellmissile.png')
+    this.load.image('oceanBackground', '../images/gamebackground.jpg')
+    this.load.image('mermaid', '../images/mermaidsprite.png')
+    this.load.image('seashell', '../images/seashell.png')
     this.load.image('shark', '../images/shark.png')
     // sound
     this.load.audio('seashell', '../sounds/seashellsound.wav')
+    this.load.audio('growl', '../sounds/growlsound.wav')
   }
 
   /**
@@ -64,17 +65,25 @@ class GameScene extends Phaser.Scene {
    * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   create (data) {
-    this.background = this.add.image(0, 0, 'starBackground').setScale(1)
+    this.background = this.add.image(0, 0, 'oceanBackground').setScale(1)
     this.background.setOrigin(0, 0)
 
-    this.ship = this.physics.add.sprite(1920 / 2, 1080 - 220, 'ship').setScale(0.35)
+    this.mermaid = this.physics.add.sprite(1920 / 2, 1080 - 220, 'mermaid').setScale(0.35)
 
-    // create a group for the missiles
-    this.missileGroup = this.physics.add.group()
+    // create a group for the seashells
+    this.seashellGroup = this.physics.add.group()
 
     // create a group for the sharks
     this.sharkGroup = this.add.group()
     this.createShark()
+
+    // collisions between seashells and sharks
+    this.physics.add.collider(this.seashellGroup, this.sharkGroup, function (seashellCollide, sharkCollide) {
+      sharkCollide.destroy()
+      seashellCollide.destroy()
+      this.sound.play('growl')
+      this.createShark()
+    }.bind(this))
   }
 
   /** 
@@ -91,34 +100,34 @@ class GameScene extends Phaser.Scene {
     const keySpaceObj = this.input.keyboard.addKey('SPACE')
 
     if (keyLeftObj.isDown === true) {
-      this.ship.x -= 15
-      if (this.ship.x < 0) {
-        this.ship.x = 1920
+      this.mermaid.x -= 15
+      if (this.mermaid.x < 0) {
+        this.mermaid.x = 1920
       }
     }
 
     if (keyRightObj.isDown === true) {
-      this.ship.x += 15
-      if (this.ship.x > 1920) {
-        this.ship.x = 0
+      this.mermaid.x += 15
+      if (this.mermaid.x > 1920) {
+        this.mermaid.x = 0
       }
     }
 
     if (keySpaceObj.isDown === true) {
-      if (this.fireMissile === false) {
-        // fire missile
-        this.fireMissile = true
-        const aNewMissile = this.physics.add.sprite(this.ship.x, this.ship.y, 'missile').setScale(0.15)
-        this.missileGroup.add(aNewMissile)
+      if (this.fireSeashell === false) {
+        // fire seashell
+        this.fireSeashell = true
+        const aNewSeashell = this.physics.add.sprite(this.mermaid.x, this.mermaid.y, 'seashell').setScale(0.15)
+        this.seashellGroup.add(aNewSeashell)
         this.sound.play('seashell')
       }
     }
 
     if (keySpaceObj.isUp === true) {
-      this.fireMissile = false
+      this.fireSeashell = false
     }
 
-    this.missileGroup.children.each(function (item) {
+    this.seashellGroup.children.each(function (item) {
       item.y = item.y - 15
       if (item.y < 0) {
         item.destroy()
