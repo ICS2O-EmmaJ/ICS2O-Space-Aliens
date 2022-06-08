@@ -63,6 +63,7 @@ class GameScene extends Phaser.Scene {
     // sound
     this.load.audio('seashell', '../sounds/seashellsound.wav')
     this.load.audio('growl', '../sounds/growlsound.wav')
+    this.load.audio('gameOver', '../sounds/gameoversound.wav')
   }
 
   /**
@@ -76,7 +77,7 @@ class GameScene extends Phaser.Scene {
 
     this.scoreText = this.add.text(10, 10, 'Score: ' + this.score.toString(), this.scoreTextStyle)
 
-    this.mermaid = this.physics.add.sprite(1920 / 2, 1080 - 220, 'mermaid').setScale(0.35)
+    this.mermaid = this.physics.add.sprite(1920 / 2, 1080 - 220, 'mermaid').setScale(0.2)
 
     // create a group for the seashells
     this.seashellGroup = this.physics.add.group()
@@ -87,13 +88,13 @@ class GameScene extends Phaser.Scene {
 
     // collisions between seashells and sharks
     this.physics.add.collider(this.seashellGroup, this.sharkGroup, function (seashellCollide, sharkCollide) {
-      sharkCollide.destroy()
       seashellCollide.destroy()
+      sharkCollide.destroy()
       this.sound.play('growl')
       this.score = this.score + 1
       this.scoreText.setText('Score: ' + this.score.toString())
       this.createShark()
-     }.bind(this))
+    }.bind(this))
 
     // collisions between mermaid and sharks
     this.physics.add.collider(this.mermaid, this.sharkGroup, function (mermaidCollide, sharkCollide) {
@@ -104,15 +105,9 @@ class GameScene extends Phaser.Scene {
       this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
       this.gameOverText.setInteractive({ useHandCursor: true })
       this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
-     }.bind(this))
+    }.bind(this))
   }
 
-  /** 
-   * Should be overridden by your own Scenes.
-   * This method is called once per game step while the scene is running.
-   *  @param {number} time - The current time.
-   *  @param {number} delta - The delta time in ms since the last frame.
-   */
   update (time, delta) {
     // called 60 times a second, hopefully!
 
