@@ -93,6 +93,7 @@ class GameScene extends Phaser.Scene {
       this.sound.play('growl')
       this.score = this.score + 1
       this.scoreText.setText('Score: ' + this.score.toString())
+      this.score = 0
       this.createShark()
     }.bind(this))
 
