@@ -51,7 +51,7 @@ class GameScene extends Phaser.Scene {
     this.load.image('seashell', '../images/seashell.png')
     this.load.image('shark', '../images/shark.png')
     // sound
-    this.load.audio('seashell', '../sounds/seashellsound.wav')
+    this.load.audio('seashellSound', '../sounds/seashellsound.wav')
     this.load.audio('growl', '../sounds/growlsound.wav')
     this.load.audio('gameOver', '../sounds/gameoversound.wav')
   }
@@ -62,8 +62,8 @@ class GameScene extends Phaser.Scene {
 
     this.scoreText = this.add.text(10, 10, 'Score: ' + this.score.toString(), this.scoreTextStyle)
 
-    this.mermaid = this.physics.add.sprite(1920 / 2, 1080 - 220, 'mermaid').setScale(0.2)
-
+    this.mermaid = this.physics.add.sprite(1920 / 2, 1080 - 220, 'mermaid').setScale(0.5);
+    
     // create a group for the seashells
     this.seashellGroup = this.physics.add.group()
 
@@ -78,7 +78,6 @@ class GameScene extends Phaser.Scene {
       this.sound.play('growl')
       this.score = this.score + 1
       this.scoreText.setText('Score: ' + this.score.toString())
-      this.score = 0
       this.createShark()
     }.bind(this))
 
@@ -91,6 +90,8 @@ class GameScene extends Phaser.Scene {
       this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
       this.gameOverText.setInteractive({ useHandCursor: true })
       this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
+      //resetting the score for the new round
+      this.score = 0;
     }.bind(this))
   }
 
@@ -118,10 +119,10 @@ class GameScene extends Phaser.Scene {
     if (keySpaceObj.isDown === true) {
       if (this.fireSeashell === false) {
         // fire seashell
-        this.fireSeashell = true
-        const aNewSeashell = this.physics.add.sprite(this.mermaid.x, this.mermaid.y, 'seashell').setScale(0.15)
+        this.fireSeashell = true   
+        const aNewSeashell = this.physics.add.sprite(this.mermaid.x, this.mermaid.y, 'seashell')
         this.seashellGroup.add(aNewSeashell)
-        this.sound.play('seashell')
+        this.sound.play('seashellSound')
       }
     }
 
