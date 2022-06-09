@@ -35,23 +35,13 @@ class GameScene extends Phaser.Scene {
     this.scoreTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' }
 
     this.gameOverText = null
-    this.gameOverTextStyle = { font: '65px Arial', fill: '#ff00000', align: 'center' }
+    this.gameOverTextStyle = { font: '65px Arial', fill: '#ff0000', align: 'center' }
   }
 
-  /**
-   * Can be defined on your own Scenes.
-   * This method is called by the Scene Manager when the scene starts,
-   *   before preload() and create().
-   * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
-   */
   init (data) {
     this.cameras.main.setBackgroundColor("#ffffff")
   }
 
-  /**
-   * Can be defined on your own Scenes.
-   * Use it to load assets.
-   */
   preload() {
     console.log('Game Scene')
 
@@ -66,11 +56,6 @@ class GameScene extends Phaser.Scene {
     this.load.audio('gameOver', '../sounds/gameoversound.wav')
   }
 
-  /**
-   * Can be defined on your own Scenes.
-   * Use it to create your game objects.
-   * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
-   */
   create (data) {
     this.background = this.add.image(0, 0, 'oceanBackground').setScale(1)
     this.background.setOrigin(0, 0)
@@ -88,8 +73,8 @@ class GameScene extends Phaser.Scene {
 
     // collisions between seashells and sharks
     this.physics.add.collider(this.seashellGroup, this.sharkGroup, function (seashellCollide, sharkCollide) {
-      seashellCollide.destroy()
       sharkCollide.destroy()
+      seashellCollide.destroy()
       this.sound.play('growl')
       this.score = this.score + 1
       this.scoreText.setText('Score: ' + this.score.toString())

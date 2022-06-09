@@ -19,7 +19,7 @@ class MenuScene extends Phaser.Scene {
     this.menuSceneBackgroundImage = null
     this.startButton = null
     this.menuSceneText = null
-    this.menuSceneTextStyle = { font: '80px Times', fill: '#ffffff', align: 'center' }
+    this.menuSceneTextStyle = { font: '200px Times', fill: '#ffffff', align: 'center' }
   }
 
   /**
@@ -56,7 +56,7 @@ class MenuScene extends Phaser.Scene {
     this.startButton.setInteractive({ useHandCursor: true })
     this.startButton.on('pointerdown', () => this.clickButton())
 
-    this.menuSceneText = this.add.text(1400, 500, 'Welcome to MAGIC MERMAID! Use the left \n and write arrow keys to move the mermaid and avoid the shark.\n You can use the spacebar to shoot seashells \n at the shark. If you come in contact with the shark, \n you will lose a life. If you shoot at a shark you \n will earn a point. You will also earn a \n point if you collect treasure \n chests!', this.titleSceneTextStyle).setOrigin(0.5)
+    this.menuSceneText = this.add.text(1000, 300, 'Welcome to MAGIC MERMAID! Use the left and right \narrow keys to move the mermaid and avoid the shark. \nYou can use the spacebar to shoot seashells at the \nshark. If you come in contact with the shark, you \nwill lose a life. If you shoot at a shark you will \nearn a point. You will also earn a point if you \ncollect treasure chests!', this.titleSceneTextStyle).setOrigin(0.5).setScale(1.5)
   }
 
   /** 
