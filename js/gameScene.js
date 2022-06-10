@@ -33,6 +33,9 @@ class GameScene extends Phaser.Scene {
     this.score = 0
     this.scoreText = null
     this.scoreTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' }
+    this.lives = 4
+    this.livesText = null
+    this.livesTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' }
 
     this.gameOverText = null
     this.gameOverTextStyle = { font: '65px Arial', fill: '#ff0000', align: 'center' }
@@ -53,7 +56,7 @@ class GameScene extends Phaser.Scene {
     // sound
     this.load.audio('seashellSound', '../sounds/seashellsound.wav')
     this.load.audio('growl', '../sounds/growlsound.wav')
-    this.load.audio('gameOver', '../sounds/gameoversound.wav')
+    this.load.audio('lose', '../sounds/gameoversound.wav')
   }
 
   create (data) {
@@ -61,6 +64,7 @@ class GameScene extends Phaser.Scene {
     this.background.setOrigin(0, 0)
 
     this.scoreText = this.add.text(10, 10, 'Score: ' + this.score.toString(), this.scoreTextStyle)
+    this.livesText = this.add.text(400, 10, 'Lives: ' + this.lives.toString(), this.livesTextStyle)
 
     this.mermaid = this.physics.add.sprite(1920 / 2, 1080 - 220, 'mermaid').setScale(0.5);
     
@@ -83,15 +87,22 @@ class GameScene extends Phaser.Scene {
 
     // collisions between mermaid and sharks
     this.physics.add.collider(this.mermaid, this.sharkGroup, function (mermaidCollide, sharkCollide) {
-      this.sound.play('gameOver')
-      this.physics.pause()
+      this.sound.play('lose')
+      this.lives -= 1
+      this.livesText.setText('Lives: ' + this.lives.toString())
       sharkCollide.destroy()
-      mermaidCollide.destroy()
-      this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
-      this.gameOverText.setInteractive({ useHandCursor: true })
-      this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
-      //resetting the score for the new round
-      this.score = 0;
+      this.mermaid.body.velocity.y = 0
+      this.createShark()
+      // if statement to have game over text appear after 4 lives have been taken
+      if (this.lives <= 0) {
+        mermaidCollide.destroy()
+        this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
+        this.gameOverText.setInteractive({ useHandCursor: true })
+        this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
+        //resetting the score and lives for the new round
+        this.score = 0
+        this.lives = 4
+      }
     }.bind(this))
   }
 
