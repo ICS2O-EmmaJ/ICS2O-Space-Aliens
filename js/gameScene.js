@@ -1,4 +1,4 @@
-/* global Phaser */
+ /* global Phaser */
 
 // Copyright (c) 2020 Mr. Coxall All rights reserved
 //
@@ -15,7 +15,7 @@ class GameScene extends Phaser.Scene {
     const sharkXLocation = Math.floor(Math.random() * 1920) + 1 // this will get a number between 1 and 1920
     let sharkXVelocity = Math.floor(Math.random() * 50) + 1 // this will get a number between 1 and 50
     sharkXVelocity *= Math.round(Math.random()) ? 1 : -1 // this will add minus sign in 50% of cases
-    const aShark = this.physics.add.sprite(sharkXLocation, -100, 'shark').setScale(0.1)
+    const aShark = this.physics.add.sprite(sharkXLocation, -100, 'shark')
     aShark.body.velocity.y = 200
     aShark.body.velocity.x = sharkXVelocity
     this.sharkGroup.add(aShark)
