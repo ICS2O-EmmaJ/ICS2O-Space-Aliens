@@ -18,9 +18,7 @@ const titleScene = new TitleScene()
 const menuScene = new MenuScene()
 const gameScene = new GameScene()
 
-/**
- * Start Phaser Game.
- */
+// Start Phaser Game
 const config = {
   type: Phaser.AUTO,
   width: 1920, 
@@ -31,7 +29,7 @@ const config = {
       debug: false
     }
   },
-  // set background color to white.
+  // set background color to white
   backgroundColor: 0xffffff,
   scale: {
     mode: Phaser.Scale.FIT,
@@ -41,10 +39,8 @@ const config = {
 }
 
 const game = new Phaser.Game(config)
-// console.log(game)
 
-// load scenes
-// NOTE: remember any "key" is global and CAN NOT be reused! 
+// setting the order to load scenes (splash scene, title scene, menu scene, then game scene)
 game.scene.add("splashScene", splashScene)
 game.scene.add("titleScene", titleScene)
 game.scene.add("menuScene", menuScene)
