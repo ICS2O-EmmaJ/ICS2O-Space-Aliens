@@ -1,8 +1,6 @@
  /* global Phaser */
 
-// Copyright (c) 2020 Mr. Coxall All rights reserved
-//
-// Modified by: Emma Janani
+// Created by: Emma Janani
 // Created on: June 2022
 // This is the Game Scene
 
@@ -130,11 +128,24 @@ class GameScene extends Phaser.Scene {
 
   update (time, delta) {
     // called 60 times a second, hopefully!
-
-    // left and right keys, and space bar
+    // left key, right key, space bar, and x key
     const keyLeftObj = this.input.keyboard.addKey('LEFT')
     const keyRightObj = this.input.keyboard.addKey('RIGHT')
     const keySpaceObj = this.input.keyboard.addKey('SPACE')
+    const keyXObj = this.input.keyboard.addKey('X')
+
+    // if x key is pressed, new seashell is created
+    if (keyXObj.isDown === true) {
+      if (this.seashellCreated === false) {
+        this.createSeashell()
+        this.seashellCreated = true
+      }
+    }
+
+    // if statement to see if x button is no longer being held
+    if (keyXObj.isUp === true) {
+      this.seashellCreated = false-
+    }
 
     // mermaid moves to the left when left key is pressed
     if (keyLeftObj.isDown === true) {
