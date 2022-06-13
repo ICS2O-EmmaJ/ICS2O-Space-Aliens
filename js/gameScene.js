@@ -35,8 +35,8 @@ class GameScene extends Phaser.Scene {
     this.scoreText = null
     // setting the style for the score text (centred, 65px and colored white)
     this.scoreTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' }
-    // initializing lives to 4
-    this.lives = 4
+    // initializing lives to 3
+    this.lives = 3
     // creating a variable to hold the lives text
     this.livesText = null
     // setting the style for the lives text (centred, 65px and colored white)
@@ -64,7 +64,8 @@ class GameScene extends Phaser.Scene {
     // loading sound effects used in the game
     this.load.audio('seashellSound', './sounds/seashellsound.wav')
     this.load.audio('growl', './sounds/growlsound.wav')
-    this.load.audio('lose', './sounds/gameoversound.wav')
+    this.load.audio('lose', './sounds/losesound.wav')
+    this.load.audio('gameOver', './sounds/gameoversound.wav')
   }
 
   create (data) {
@@ -112,8 +113,9 @@ class GameScene extends Phaser.Scene {
       this.mermaid.body.velocity.y = 0
       // new shark appears
       this.createShark()
-      // if statement to have game over text appear after 4 lives have been lost
+      // if statement to have game over text appear after 3 lives have been lost
       if (this.lives <= 0) {
+        this.sound.play('gameOver')
         mermaidCollide.destroy()
         this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
         // game over text can be clicked on to restart the game
@@ -121,7 +123,7 @@ class GameScene extends Phaser.Scene {
         this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
         // resetting the score and lives for new round
         this.score = 0
-        this.lives = 4
+        this.lives = 3
       }
     }.bind(this))
   }

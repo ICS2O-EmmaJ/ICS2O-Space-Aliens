@@ -18,10 +18,6 @@ class MenuScene extends Phaser.Scene {
     this.startButton = null
     // creating a variable to hold the instruction button
     this.instructionButton = null
-    // creating a variable to hold the menu scene text
-    this.menuSceneText = null
-    // setting the style of the menu text to 200px, centred and in the color white
-    this.menuSceneTextStyle = { font: '200px Times', fill: '#ffffff', align: 'center' }
   }
 
   init (data) {
@@ -46,19 +42,17 @@ class MenuScene extends Phaser.Scene {
     this.menuSceneBackgroundImage.y = 1080 / 2
 
     // setting coordinates, location and scale of instruction button
-    this.instructionButton = this.add.sprite(1600, 200, 'instructionButton').setScale(0.7)
+    this.instructionButton = this.add.sprite(300, 210, 'instructionButton').setScale(0.4)
     // making the button clickable
     this.instructionButton.setInteractive({ useHandCursor: true })
     this.instructionButton.on('pointerdown', () => this.clickSecondButton())
     
     // setting coordinates, location and scale of start button
-    this.startButton = this.add.sprite(300, 20, 'startButton').setScale(0.7)
+    this.startButton = this.add.sprite(1600, 200, 'startButton').setScale(0.7)
     // making the button clickable
     this.startButton.setInteractive({ useHandCursor: true })
     this.startButton.on('pointerdown', () => this.clickButton())
 
-    // adding text for the instructions of the game
-    this.menuSceneText = this.add.text(1000, 300, 'Welcome to MAGIC MERMAID! Use the left and right \narrow keys to move the mermaid and avoid the shark. \nYou can use the spacebar to shoot seashells at the \nshark. If you come in contact with the shark, you \nwill lose a life. If you shoot at a shark you will \nearn a point. The game will end if you lose all 4 \nlives!', this.titleSceneTextStyle).setOrigin(0.5).setScale(1.5)
   }
 
   update (time, delta) {
