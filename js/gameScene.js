@@ -128,23 +128,23 @@ class GameScene extends Phaser.Scene {
 
   update (time, delta) {
     // called 60 times a second, hopefully!
-    // left key, right key, space bar, and x key
+    // left key, right key, space bar, and p key
     const keyLeftObj = this.input.keyboard.addKey('LEFT')
     const keyRightObj = this.input.keyboard.addKey('RIGHT')
     const keySpaceObj = this.input.keyboard.addKey('SPACE')
-    const keyXObj = this.input.keyboard.addKey('X')
+    const keyPObj = this.input.keyboard.addKey('P')
 
-    // if x key is pressed, new seashell is created
-    if (keyXObj.isDown === true) {
+    // if p key is pressed, new seashell is created
+    if (keyPObj.isDown === true) {
       if (this.seashellCreated === false) {
         this.createSeashell()
         this.seashellCreated = true
       }
     }
 
-    // if statement to see if x button is no longer being held
-    if (keyXObj.isUp === true) {
-      this.seashellCreated = false-
+    // if statement to see if p button is no longer being held
+    if (keyPObj.isUp === true) {
+      this.seashellCreated = false
     }
 
     // mermaid moves to the left when left key is pressed
