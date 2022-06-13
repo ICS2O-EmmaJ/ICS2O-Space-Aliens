@@ -24,7 +24,7 @@ class SplashScene extends Phaser.Scene {
   preload() {
     console.log("Splash Scene")
     // Importing image of the Immaculata Crest
-    this.load.image('splashSceneBackground', '../images/immaculatacrest.jpeg')
+    this.load.image('splashSceneBackground', './images/immaculatacrest.jpeg')
   }
 
   // Setting coordinates, location and scale of Immaculata Crest

@@ -30,9 +30,9 @@ class MenuScene extends Phaser.Scene {
   preload() {
     console.log('Menu Scene')
     // loading the menu scene background image of coral reef landscape
-    this.load.image('menuSceneBackground', '../images/menubackground.jpg')
+    this.load.image('menuSceneBackground', './images/menubackground.jpg')
     // loading the image of the blue start button
-    this.load.image('startButton', '../images/startbutton.webp')
+    this.load.image('startButton', './images/startbutton.webp')
   }
 
   create (data) {

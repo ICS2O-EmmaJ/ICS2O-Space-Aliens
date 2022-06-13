@@ -57,14 +57,14 @@ class GameScene extends Phaser.Scene {
     console.log('Game Scene')
 
     // loading images used in the game
-    this.load.image('oceanBackground', '../images/gamebackground.jpg')
-    this.load.image('mermaid', '../images/mermaidsprite.png')
-    this.load.image('seashell', '../images/seashell.png')
-    this.load.image('shark', '../images/shark.png')
+    this.load.image('oceanBackground', './images/gamebackground.jpg')
+    this.load.image('mermaid', './images/mermaidsprite.png')
+    this.load.image('seashell', './images/seashell.png')
+    this.load.image('shark', './images/shark.png')
     // loading sound effects used in the game
-    this.load.audio('seashellSound', '../sounds/seashellsound.wav')
-    this.load.audio('growl', '../sounds/growlsound.wav')
-    this.load.audio('lose', '../sounds/gameoversound.wav')
+    this.load.audio('seashellSound', './sounds/seashellsound.wav')
+    this.load.audio('growl', './sounds/growlsound.wav')
+    this.load.audio('lose', './sounds/gameoversound.wav')
   }
 
   create (data) {

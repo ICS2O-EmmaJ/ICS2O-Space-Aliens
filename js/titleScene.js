@@ -28,7 +28,7 @@ class TitleScene extends Phaser.Scene {
   preload() {
     console.log('Title Scene')
     // loading the title scene background image of mermaid silhouette
-    this.load.image('titleSceneBackground', '../images/titlebackground.jpg')
+    this.load.image('titleSceneBackground', './images/titlebackground.jpg')
   }
 
   // setting coordinates, location and size of the background image
