@@ -19,7 +19,7 @@ class GameScene extends Phaser.Scene {
     this.sharkGroup.add(aShark)
   }
   
-  // the constructor
+  // the constructord
   constructor () {
     super({ key: "gameScene" })
 
