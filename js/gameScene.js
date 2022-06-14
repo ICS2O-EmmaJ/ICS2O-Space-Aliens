@@ -44,6 +44,9 @@ class GameScene extends Phaser.Scene {
     this.gameOverText = null
     // setting the style for the game over text (centred, 65px and colored red)
     this.gameOverTextStyle = { font: '65px Arial', fill: '#ff0000', align: 'center' }
+
+    //initializing the variable for sharks created
+    this.sharkCreated = false;
   }
 
   init (data) {
@@ -132,10 +135,10 @@ class GameScene extends Phaser.Scene {
     const keyLeftObj = this.input.keyboard.addKey('LEFT')
     const keyRightObj = this.input.keyboard.addKey('RIGHT')
     const keySpaceObj = this.input.keyboard.addKey('SPACE')
-    const keyPObj = this.input.keyboard.addKey('P')
+    const keyAObj = this.input.keyboard.addKey('A')
 
     // if p key is pressed, new seashell is created
-    if (keyPObj.isDown === true) {
+    if (keyAObj.isDown === true) {
       if (this.sharkCreated === false) {
         this.createShark()
         this.sharkCreated = true
@@ -143,7 +146,7 @@ class GameScene extends Phaser.Scene {
     }
 
     // if statement to see if p button is no longer being held
-    if (keyPObj.isUp === true) {
+    if (keyAObj.isUp === true) {
       this.sharkCreated = false
     }
 
