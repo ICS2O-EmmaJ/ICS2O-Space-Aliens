@@ -32,18 +32,18 @@ class GameScene extends Phaser.Scene {
     // creating a variable to hold the score text
     this.scoreText = null
     // setting the style for the score text (centred, 65px and colored white)
-    this.scoreTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' }
+    this.scoreTextStyle = { font: '65px Times', fill: '#ffffff', align: 'center' }
     // initializing lives to 3
     this.lives = 3
     // creating a variable to hold the lives text
     this.livesText = null
     // setting the style for the lives text (centred, 65px and colored white)
-    this.livesTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' }
+    this.livesTextStyle = { font: '65px Times', fill: '#ffffff', align: 'center' }
 
     // creating a variable to hold the game over text
     this.gameOverText = null
-    // setting the style for the game over text (centred, 65px and colored red)
-    this.gameOverTextStyle = { font: '65px Arial', fill: '#ff0000', align: 'center' }
+    // setting the style for the game over text (centred, 65px and colored white)
+    this.gameOverTextStyle = { font: '65px Times', fill: '#ffffff', align: 'center' }
 
     //initializing the variable for sharks created
     this.sharkCreated = false;
@@ -125,7 +125,7 @@ class GameScene extends Phaser.Scene {
       if (this.lives <= 0) {
         this.sound.play('gameOver')
         mermaidCollide.destroy()
-        this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
+        this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Oh no! Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
         // game over text can be clicked on to restart the game
         this.gameOverText.setInteractive({ useHandCursor: true })
         this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
@@ -196,6 +196,14 @@ class GameScene extends Phaser.Scene {
       item.y = item.y - 15
       if (item.y < 0) {
         item.destroy()
+      }
+    })
+
+    // relooping the sharks to come back when they go off the screen
+    this.sharkGroup.children.each(function (item) {
+      if (item.y > 1080) {
+        item.y = -10
+        item.x = Math.floor(Math.random() * 1920 + 1) 
       }
     })
   }
