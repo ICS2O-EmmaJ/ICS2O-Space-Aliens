@@ -35,6 +35,8 @@ class InstructionScene extends Phaser.Scene {
     this.load.image('backButton', './images/backbutton.png')
     // loading the image of the blue forward button
     this.load.image('forwardButton', './images/forwardbutton.png')
+    // loading the audio for when the button is clicked
+    this.load.audio('click', './sounds/clicksound.wav')
   }
 
   create (data) {
@@ -48,6 +50,7 @@ class InstructionScene extends Phaser.Scene {
     // making the button clickable
     this.backButton.setInteractive({ useHandCursor: true })
     this.backButton.on('pointerdown', () => this.clickButton())
+  
 
     // setting coordinates, location and scale of forward button
     this.forwardButton = this.add.sprite(1600, 210, 'forwardButton').setScale(0.2)
@@ -56,7 +59,7 @@ class InstructionScene extends Phaser.Scene {
     this.forwardButton.on('pointerdown', () => this.clickSecondButton())
 
     // adding text for the instructions of the game
-    this.instructionSceneText = this.add.text(1000, 300, 'Welcome to MAGIC MERMAID! Use the left and \nright arrow keys to move the mermaid and avoid the \nshark. You can use the spacebar to shoot seashells at \nthe shark. If you come in contact with the shark, you \nwill lose a life. If you shoot at a shark you will earn \na point. The game will end if you lose all 3 lives!', this.instructionSceneTextStyle).setOrigin(0.5).setScale(0.2)
+    this.instructionSceneText = this.add.text(1000, 300, 'Welcome to MAGIC MERMAID! Use the left and \nright arrow keys to move the mermaid and avoid the \nshark. You can use the spacebar to shoot seashells at \nthe shark. If you come in contact with the shark, you \nwill lose a life. If you shoot at a shark you will earn \na point. The game will end if you lose all 3 lives! \nYou can click the "a" key to make more sharks appear.', this.instructionSceneTextStyle).setOrigin(0.5).setScale(0.2)
   }
 
   update (time, delta) {
@@ -65,11 +68,13 @@ class InstructionScene extends Phaser.Scene {
   // when the back button is clicked the scene switches back to the menu scene
   clickButton () {
     this.scene.start('menuScene')
+    this.sound.play('click')
   }
   
   // when the forward button is clicked the scene switches to the game scene
   clickSecondButton () {
     this.scene.start('gameScene')
+    this.sound.play('click')
   }
 }
 

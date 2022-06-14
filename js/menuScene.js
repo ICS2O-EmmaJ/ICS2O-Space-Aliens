@@ -30,7 +30,9 @@ class MenuScene extends Phaser.Scene {
     // loading the image of the blue start button
     this.load.image('startButton', './images/startbutton.webp')
     // loading the image of the blue instruction button
-    this.load.image('instructionButton', './images/instructionbutton.png')
+    this.load.image('instructionButton', './images/instructionbutton.png'
+    // loading the audio for when the button is clicked
+    this.load.audio('click', './sounds/clicksound.wav')
   }
 
   create (data) {
@@ -50,7 +52,6 @@ class MenuScene extends Phaser.Scene {
     // making the button clickable
     this.startButton.setInteractive({ useHandCursor: true })
     this.startButton.on('pointerdown', () => this.clickButton())
-
   }
 
   update (time, delta) {
@@ -59,6 +60,7 @@ class MenuScene extends Phaser.Scene {
   // when the instruction button is clicked the scene switches to the instructions
   clickSecondButton () {
     this.scene.start('instructionScene')
+    this.sound.play('click')
   }
   
   // when the start button is clicked the scene switches and the game begins

@@ -57,15 +57,22 @@ class GameScene extends Phaser.Scene {
   preload() {
     console.log('Game Scene')
 
-    // loading images used in the game
+    // loading image for the ocean background
     this.load.image('oceanBackground', './images/gamebackground.jpg')
+    // loading image for the mermaid sprite
     this.load.image('mermaid', './images/mermaidsprite.png')
+    // loading the image for the seashell
     this.load.image('seashell', './images/seashell.png')
+    // loading the image for the shark
     this.load.image('shark', './images/shark.png')
-    // loading sound effects used in the game
+    
+    // loading sound effect for when you shoot the seashell
     this.load.audio('seashellSound', './sounds/seashellsound.wav')
+    // loading the sound effect for when the shark is hit by the seashell
     this.load.audio('growl', './sounds/growlsound.wav')
+    // loading the sound effect for when the mermaid is hit by the shark
     this.load.audio('lose', './sounds/losesound.wav')
+    // loading the sound effect for when the game is over
     this.load.audio('gameOver', './sounds/gameoversound.wav')
   }
 
@@ -137,7 +144,7 @@ class GameScene extends Phaser.Scene {
     const keySpaceObj = this.input.keyboard.addKey('SPACE')
     const keyAObj = this.input.keyboard.addKey('A')
 
-    // if p key is pressed, new seashell is created
+    // if a key is pressed, new seashell is created
     if (keyAObj.isDown === true) {
       if (this.sharkCreated === false) {
         this.createShark()
