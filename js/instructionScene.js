@@ -67,14 +67,14 @@ class InstructionScene extends Phaser.Scene {
 
   // when the back button is clicked the scene switches back to the menu scene
   clickButton () {
-    this.scene.start('menuScene')
     this.sound.play('click')
+    this.scene.start('menuScene')
   }
   
   // when the forward button is clicked the scene switches to the game scene
   clickSecondButton () {
-    this.scene.start('gameScene')
     this.sound.play('click')
+    this.scene.start('gameScene')
   }
 }
 

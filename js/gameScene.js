@@ -17,7 +17,7 @@ class GameScene extends Phaser.Scene {
     this.sharkGroup.add(aShark)
   }
   
-  // the constructord
+  // the constructor
   constructor () {
     super({ key: "gameScene" })
 
@@ -45,7 +45,7 @@ class GameScene extends Phaser.Scene {
     // setting the style for the game over text (centred, 65px and colored white)
     this.gameOverTextStyle = { font: '65px Times', fill: '#ffffff', align: 'center' }
 
-    //initializing the variable for sharks created
+    // initializing the variable for sharks created
     this.sharkCreated = false;
   }
 
@@ -144,7 +144,7 @@ class GameScene extends Phaser.Scene {
     const keySpaceObj = this.input.keyboard.addKey('SPACE')
     const keyAObj = this.input.keyboard.addKey('A')
 
-    // if a key is pressed, new seashell is created
+    // if "a" key is pressed, new seashell is created
     if (keyAObj.isDown === true) {
       if (this.sharkCreated === false) {
         this.createShark()

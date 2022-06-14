@@ -18,7 +18,7 @@ const menuScene = new MenuScene()
 const instructionScene = new InstructionScene()
 const gameScene = new GameScene()
 
-// Start Phaser Game
+// start Phaser Game
 const config = {
   type: Phaser.AUTO,
   width: 1920, 

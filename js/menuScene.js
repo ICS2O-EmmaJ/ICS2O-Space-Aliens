@@ -59,14 +59,16 @@ class MenuScene extends Phaser.Scene {
 
   // when the instruction button is clicked the scene switches to the instructions
   clickSecondButton () {
-    this.scene.start('instructionScene')
+    // clicking sound plays when button is clicked
     this.sound.play('click')
+    this.scene.start('instructionScene')
   }
   
   // when the start button is clicked the scene switches and the game begins
   clickButton () {
-    this.scene.start('gameScene')
+    // clicking sound plays when button is clicked
     this.sound.play('click')
+    this.scene.start('gameScene')
   }
 }
 

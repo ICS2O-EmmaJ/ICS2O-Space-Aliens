@@ -6,14 +6,14 @@
 
 class SplashScene extends Phaser.Scene {
 
-  // Constructor
+  // constructor
   constructor () {
     super({ key: 'splashScene' })
-    // Variable to hold the splashs scene background image
+    // variable to hold the splashs scene background image
     this.splashSceneBackgroundImage = null
   }
 
-  // Setting the splash scene background color to dark blue
+  // setting the splash scene background color to dark blue to match the Immaculata crest
   init (data) {
     this.cameras.main.setBackgroundColor("#365b9c")
   }
@@ -21,11 +21,11 @@ class SplashScene extends Phaser.Scene {
 
   preload() {
     console.log("Splash Scene")
-    // Importing image of the Immaculata Crest
+    // importing image of the Immaculata Crest
     this.load.image('splashSceneBackground', './images/immaculatacrest.jpeg')
   }
 
-  // Setting coordinates, location and scale of Immaculata Crest
+  // setting coordinates, location and scale of Immaculata crest
   create (data) {
     this.splashSceneBackgroundImage = this.add.sprite(0, 0, 'splashSceneBackground').setScale(2)
     this.splashSceneBackgroundImage.x = 1920 / 2
