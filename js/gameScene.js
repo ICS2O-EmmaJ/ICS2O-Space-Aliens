@@ -136,15 +136,15 @@ class GameScene extends Phaser.Scene {
 
     // if p key is pressed, new seashell is created
     if (keyPObj.isDown === true) {
-      if (this.seashellCreated === false) {
-        this.createSeashell()
-        this.seashellCreated = true
+      if (this.sharkCreated === false) {
+        this.createShark()
+        this.sharkCreated = true
       }
     }
 
     // if statement to see if p button is no longer being held
     if (keyPObj.isUp === true) {
-      this.seashellCreated = false
+      this.sharkCreated = false
     }
 
     // mermaid moves to the left when left key is pressed
