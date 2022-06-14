@@ -30,7 +30,7 @@ class MenuScene extends Phaser.Scene {
     // loading the image of the blue start button
     this.load.image('startButton', './images/startbutton.webp')
     // loading the image of the blue instruction button
-    this.load.image('instructionButton', './images/instructionbutton.png'
+    this.load.image('instructionButton', './images/instructionbutton.png')
     // loading the audio for when the button is clicked
     this.load.audio('click', './sounds/clicksound.wav')
   }
