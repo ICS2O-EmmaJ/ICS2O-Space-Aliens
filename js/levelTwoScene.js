@@ -2,24 +2,24 @@
 
 // Created by: Emma Janani
 // Created on: June 2022
-// This is the Game Scene
+// This is the Level Two Scene
 
 
-class GameScene extends Phaser.Scene {
-  // create a shark sprite
-  createShark () {
-    const sharkXLocation = Math.floor(Math.random() * 1920) + 1 // this will get a number between 1 and 1920
-    let sharkXVelocity = Math.floor(Math.random() * 50) + 1 // this will get a number between 1 and 50
-    sharkXVelocity *= Math.round(Math.random()) ? 1 : -1 // this will add minus sign in 50% of cases
-    const aShark = this.physics.add.sprite(sharkXLocation, -100, 'shark')
-    aShark.body.velocity.y = 200
-    aShark.body.velocity.x = sharkXVelocity
-    this.sharkGroup.add(aShark)
+class LevelTwoScene extends Phaser.Scene {
+  // create a jellyfish sprite
+  createJellyfish () {
+    const jellyfishXLocation = Math.floor(Math.random() * 1920) + 1 // this will get a number between 1 and 1920
+    let jellyfishXVelocity = Math.floor(Math.random() * 50) + 1 // this will get a number between 1 and 50
+    jellyfishXVelocity *= Math.round(Math.random()) ? 1 : -1 // this will add minus sign in 50% of cases
+    const ajellyfish = this.physics.add.sprite(jellyfishXLocation, -100, 'jellyfish').setScale(0.3)
+    ajellyfish.body.velocity.y = 200
+    ajellyfish.body.velocity.x = jellyfishXVelocity
+    this.jellyfishGroup.add(ajellyfish)
   }
   
   // the constructor
   constructor () {
-    super({ key: "gameScene" })
+    super({ key: "levelTwoScene" })
 
     // creating a variable that holds the background image
     this.background = null
@@ -40,8 +40,8 @@ class GameScene extends Phaser.Scene {
     // setting the style for the lives text (centred, 65px and colored white)
     this.livesTextStyle = { font: '65px Times', fill: '#ffffff', align: 'center' }
 
-    // initializing the variable for sharks created
-    this.sharkCreated = false;
+    // initializing the variable for jellyfish created
+    this.jellyfishCreated = false;
   }
 
   init (data) {
@@ -50,22 +50,22 @@ class GameScene extends Phaser.Scene {
   }
 
   preload() {
-    console.log('Game Scene')
+    console.log('Level Two Scene')
 
     // loading image for the ocean background
-    this.load.image('oceanBackground', './images/gamebackground.jpg')
+    this.load.image('deepOceanBackground', './images/leveltwobackground.jpg')
     // loading image for the mermaid sprite
     this.load.image('mermaid', './images/mermaidsprite.png')
     // loading the image for the seashell
     this.load.image('seashell', './images/seashell.png')
-    // loading the image for the shark
-    this.load.image('shark', './images/shark.png')
+    // loading the image for the jellyfish
+    this.load.image('jellyfish', './images/jellyfish.png')
     
     // loading sound effect for when you shoot the seashell
     this.load.audio('seashellSound', './sounds/seashellsound.wav')
-    // loading the sound effect for when the shark is hit by the seashell
+    // loading the sound effect for when the jellyfish is hit by the seashell
     this.load.audio('growl', './sounds/growlsound.wav')
-    // loading the sound effect for when the mermaid is hit by the shark
+    // loading the sound effect for when the mermaid is hit by the jellyfish
     this.load.audio('lose', './sounds/losesound.wav')
     // loading the sound effect for when the game is over
     this.load.audio('gameOver', './sounds/gameoversound.wav')
@@ -73,7 +73,7 @@ class GameScene extends Phaser.Scene {
 
   create (data) {
     // setting the coordinates, location and size of background
-    this.background = this.add.image(0, 0, 'oceanBackground').setScale(1)
+    this.background = this.add.image(0, 0, 'deepOceanBackground').setScale(2.6)
     this.background.setOrigin(0, 0)
 
     // score counter
@@ -86,42 +86,44 @@ class GameScene extends Phaser.Scene {
     // create a group for the seashells
     this.seashellGroup = this.physics.add.group()
 
-    // create a group for the sharks
-    this.sharkGroup = this.add.group()
-    this.createShark()
+    // create a group for the jellyfish
+    this.jellyfishGroup = this.add.group()
+    this.createJellyfish()
 
-    // collisions between seashells and sharks
-    this.physics.add.collider(this.seashellGroup, this.sharkGroup, function (seashellCollide, sharkCollide) {
-      // shark and seashell disappear when they collide
-      sharkCollide.destroy()
+    // collisions between seashells and jellyfish
+    this.physics.add.collider(this.seashellGroup, this.jellyfishGroup, function (seashellCollide, jellyfishCollide) {
+      // jellyfish and seashell disappear when they collide
+      jellyfishCollide.destroy()
       seashellCollide.destroy()
       // growling sound effect plays
       this.sound.play('growl')
-      // score increases by 1 when shark gets hit by seashell
+      // score increases by 1 when jellyfish gets hit by seashell
       this.score = this.score + 1
       this.scoreText.setText('Score: ' + this.score.toString())
-      // new shark appears
-      this.createShark()
+      // new jellyfish appears
+      this.createJellyfish()
     }.bind(this))
 
-    // collisions between mermaid and sharks
-    this.physics.add.collider(this.mermaid, this.sharkGroup, function (mermaidCollide, sharkCollide) {
+    // collisions between mermaid and jellyfish
+    this.physics.add.collider(this.mermaid, this.jellyfishGroup, function (mermaidCollide, jellyfishCollide) {
       // losing sound effect plays
       this.sound.play('lose')
-      // lives decrease by 1 when mermaid comes in contact with shark
+      // lives decrease by 1 when mermaid comes in contact with jellyfish
       this.lives -= 1
       this.livesText.setText('Lives: ' + this.lives.toString())
-      // shark disappears
-      sharkCollide.destroy()
+      // jellyfish disappears
+      jellyfishCollide.destroy()
       this.mermaid.body.velocity.y = 0
-      // new shark appears
-      this.createShark()
+      // new jellyfish appears
+      this.createJellyfish()
       // if statement to have game over text appear after 3 lives have been lost
       if (this.lives <= 0) {
         this.sound.play('gameOver')
         mermaidCollide.destroy()
-        // switching to game over scene 
-        this.scene.start('gameOverScene')
+        this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Oh no! Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
+        // game over text can be clicked on to restart the game
+        this.gameOverText.setInteractive({ useHandCursor: true })
+        this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
         // resetting the score and lives for new round
         this.score = 0
         this.lives = 3
@@ -139,15 +141,15 @@ class GameScene extends Phaser.Scene {
 
     // if "a" key is pressed, new seashell is created
     if (keyAObj.isDown === true) {
-      if (this.sharkCreated === false) {
-        this.createShark()
-        this.sharkCreated = true
+      if (this.jellyfishCreated === false) {
+        this.createJellyfish()
+        this.jellyfishCreated = true
       }
     }
 
     // if statement to see if p button is no longer being held
     if (keyAObj.isUp === true) {
-      this.sharkCreated = false
+      this.jellyfishCreated = false
     }
 
     // mermaid moves to the left when left key is pressed
@@ -192,8 +194,8 @@ class GameScene extends Phaser.Scene {
       }
     })
 
-    // relooping the sharks to come back when they go off the screen
-    this.sharkGroup.children.each(function (item) {
+    // relooping the jellyfish to come back when they go off the screen
+    this.jellyfishGroup.children.each(function (item) {
       if (item.y > 1080) {
         item.y = -10
         item.x = Math.floor(Math.random() * 1920 + 1) 
@@ -202,5 +204,4 @@ class GameScene extends Phaser.Scene {
   }
 }
 
-export default GameScene
-  
+export default LevelTwoScene
