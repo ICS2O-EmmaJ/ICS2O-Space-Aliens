@@ -6,15 +6,15 @@
 
 
 class LevelTwoScene extends Phaser.Scene {
-  // create a jellyfish sprite
-  createJellyfish () {
-    const jellyfishXLocation = Math.floor(Math.random() * 1920) + 1 // this will get a number between 1 and 1920
-    let jellyfishXVelocity = Math.floor(Math.random() * 50) + 1 // this will get a number between 1 and 50
-    jellyfishXVelocity *= Math.round(Math.random()) ? 1 : -1 // this will add minus sign in 50% of cases
-    const ajellyfish = this.physics.add.sprite(jellyfishXLocation, -100, 'jellyfish').setScale(0.3)
-    ajellyfish.body.velocity.y = 200
-    ajellyfish.body.velocity.x = jellyfishXVelocity
-    this.jellyfishGroup.add(ajellyfish)
+  // create a seamonster sprite
+  createSeamonster () {
+    const seamonsterXLocation = Math.floor(Math.random() * 1920) + 1 // this will get a number between 1 and 1920
+    let seamonsterXVelocity = Math.floor(Math.random() * 50) + 1 // this will get a number between 1 and 50
+    seamonsterXVelocity *= Math.round(Math.random()) ? 1 : -1 // this will add minus sign in 50% of cases
+    const aseamonster = this.physics.add.sprite(seamonsterXLocation, -100, 'seamonster').setScale(0.3)
+    aseamonster.body.velocity.y = 200
+    aseamonster.body.velocity.x = seamonsterXVelocity
+    this.seamonsterGroup.add(aseamonster)
   }
   
   // the constructor
@@ -40,8 +40,8 @@ class LevelTwoScene extends Phaser.Scene {
     // setting the style for the lives text (centred, 65px and colored white)
     this.livesTextStyle = { font: '65px Times', fill: '#ffffff', align: 'center' }
 
-    // initializing the variable for jellyfish created
-    this.jellyfishCreated = false;
+    // initializing the variable for seamonster created
+    this.seamonsterCreated = false;
   }
 
   init (data) {
@@ -53,19 +53,19 @@ class LevelTwoScene extends Phaser.Scene {
     console.log('Level Two Scene')
 
     // loading image for the ocean background
-    this.load.image('deepOceanBackground', './images/leveltwobackground.jpg')
+    this.load.image('deepOceanBackground', './images/leveltwobackground.jpeg')
     // loading image for the mermaid sprite
     this.load.image('mermaid', './images/mermaidsprite.png')
     // loading the image for the seashell
     this.load.image('seashell', './images/seashell.png')
-    // loading the image for the jellyfish
-    this.load.image('jellyfish', './images/jellyfish.png')
+    // loading the image for the seamonster
+    this.load.image('seamonster', './images/seamonster.webp')
     
     // loading sound effect for when you shoot the seashell
     this.load.audio('seashellSound', './sounds/seashellsound.wav')
-    // loading the sound effect for when the jellyfish is hit by the seashell
-    this.load.audio('growl', './sounds/growlsound.wav')
-    // loading the sound effect for when the mermaid is hit by the jellyfish
+    // loading the sound effect for when the seamonster is hit by the seashell
+    this.load.audio('hiss', './sounds/hisssound.wav')
+    // loading the sound effect for when the mermaid is hit by the seamonster
     this.load.audio('lose', './sounds/losesound.wav')
     // loading the sound effect for when the game is over
     this.load.audio('gameOver', './sounds/gameoversound.wav')
@@ -73,7 +73,7 @@ class LevelTwoScene extends Phaser.Scene {
 
   create (data) {
     // setting the coordinates, location and size of background
-    this.background = this.add.image(0, 0, 'deepOceanBackground').setScale(2.6)
+    this.background = this.add.image(0, 0, 'deepOceanBackground').setScale(1.5)
     this.background.setOrigin(0, 0)
 
     // score counter
@@ -86,44 +86,43 @@ class LevelTwoScene extends Phaser.Scene {
     // create a group for the seashells
     this.seashellGroup = this.physics.add.group()
 
-    // create a group for the jellyfish
-    this.jellyfishGroup = this.add.group()
-    this.createJellyfish()
+    // create a group for the seamonster
+    this.seamonsterGroup = this.add.group()
+    this.createSeamonster()
 
-    // collisions between seashells and jellyfish
-    this.physics.add.collider(this.seashellGroup, this.jellyfishGroup, function (seashellCollide, jellyfishCollide) {
-      // jellyfish and seashell disappear when they collide
-      jellyfishCollide.destroy()
+    // collisions between seashells and seamonster
+    this.physics.add.collider(this.seashellGroup, this.seamonsterGroup, function (seashellCollide, seamonsterCollide) {
+      // seamonster and seashell disappear when they collide
+      seamonsterCollide.destroy()
       seashellCollide.destroy()
-      // growling sound effect plays
-      this.sound.play('growl')
-      // score increases by 1 when jellyfish gets hit by seashell
+      // hissing sound effect plays
+      this.sound.play('hiss')
+      // score increases by 1 when seamonster gets hit by seashell
       this.score = this.score + 1
       this.scoreText.setText('Score: ' + this.score.toString())
-      // new jellyfish appears
-      this.createJellyfish()
+      // new seamonster appears
+      this.createSeamonster()
+      this.createSeamonster()
     }.bind(this))
 
-    // collisions between mermaid and jellyfish
-    this.physics.add.collider(this.mermaid, this.jellyfishGroup, function (mermaidCollide, jellyfishCollide) {
+    // collisions between mermaid and seamonster
+    this.physics.add.collider(this.mermaid, this.seamonsterGroup, function (mermaidCollide, seamonsterCollide) {
       // losing sound effect plays
       this.sound.play('lose')
-      // lives decrease by 1 when mermaid comes in contact with jellyfish
+      // lives decrease by 1 when mermaid comes in contact with seamonster
       this.lives -= 1
       this.livesText.setText('Lives: ' + this.lives.toString())
-      // jellyfish disappears
-      jellyfishCollide.destroy()
+      // seamonster disappears
+      seamonsterCollide.destroy()
       this.mermaid.body.velocity.y = 0
-      // new jellyfish appears
-      this.createJellyfish()
+      // new seamonster appears
+      this.createSeamonster()
       // if statement to have game over text appear after 3 lives have been lost
       if (this.lives <= 0) {
         this.sound.play('gameOver')
         mermaidCollide.destroy()
-        this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Oh no! Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
-        // game over text can be clicked on to restart the game
-        this.gameOverText.setInteractive({ useHandCursor: true })
-        this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
+        // switching to second game over scene 
+        this.scene.start('secondGameOverScene')
         // resetting the score and lives for new round
         this.score = 0
         this.lives = 3
@@ -141,15 +140,15 @@ class LevelTwoScene extends Phaser.Scene {
 
     // if "a" key is pressed, new seashell is created
     if (keyAObj.isDown === true) {
-      if (this.jellyfishCreated === false) {
-        this.createJellyfish()
-        this.jellyfishCreated = true
+      if (this.seamonsterCreated === false) {
+        this.createSeamonster()
+        this.seamonsterCreated = true
       }
     }
 
     // if statement to see if p button is no longer being held
     if (keyAObj.isUp === true) {
-      this.jellyfishCreated = false
+      this.seamonsterCreated = false
     }
 
     // mermaid moves to the left when left key is pressed
@@ -194,8 +193,8 @@ class LevelTwoScene extends Phaser.Scene {
       }
     })
 
-    // relooping the jellyfish to come back when they go off the screen
-    this.jellyfishGroup.children.each(function (item) {
+    // relooping the seamonster to come back when they go off the screen
+    this.seamonsterGroup.children.each(function (item) {
       if (item.y > 1080) {
         item.y = -10
         item.x = Math.floor(Math.random() * 1920 + 1) 

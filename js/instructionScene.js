@@ -19,7 +19,7 @@ class InstructionScene extends Phaser.Scene {
     // creating a variable to hold the instruction text
     this.instructionSceneText = null
     // setting the style of the instruction text to 200px, centred and in the color white
-    this.instructionSceneTextStyle = { font: '200px Times', fill: '#ffffff', align: 'center' }
+    this.instructionSceneTextStyle = { font: '200px Times', fill: '#000000', align: 'center' }
   }
 
   init (data) {
@@ -41,7 +41,7 @@ class InstructionScene extends Phaser.Scene {
 
   create (data) {
     // setting coordinates, location and scale of background image
-    this.instructionSceneBackgroundImage = this.add.sprite(0, 0, 'instructionSceneBackground').setScale(0.5)
+    this.instructionSceneBackgroundImage = this.add.sprite(0, 0, 'instructionSceneBackground').setScale(1)
     this.instructionSceneBackgroundImage.x = 1920 / 2
     this.instructionSceneBackgroundImage.y = 1080 / 2
 
