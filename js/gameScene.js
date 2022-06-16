@@ -157,6 +157,7 @@ class GameScene extends Phaser.Scene {
         // mermaid wraps around
         this.mermaid.x = 1920
       }
+      this.mermaid.flipX = true
     }
 
     // mermaid moves to the right when right key is pressed
@@ -166,6 +167,7 @@ class GameScene extends Phaser.Scene {
         // mermaid wraps around
         this.mermaid.x = 0
       }
+      this.mermaid.flipX = false
     }
 
     // mermaid shoots seashells when spacebar is pressed

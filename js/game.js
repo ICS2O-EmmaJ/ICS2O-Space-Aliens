@@ -22,7 +22,7 @@ const instructionScene = new InstructionScene()
 const gameScene = new GameScene()
 const gameOverScene = new GameOverScene()
 const levelTwoScene = new LevelTwoScene()
-const secondGameOverScene = new secondGameOverScene()
+const secondGameOverScene = new SecondGameOverScene()
 
 // start Phaser Game
 const config = {
@@ -57,6 +57,6 @@ game.scene.add("levelTwoScene", levelTwoScene)
 game.scene.add("secondGameOverScene", secondGameOverScene)
 
 // the start scene
-// game.scene.start("splashScene")
-game.scene.start("gameOverScene")
+game.scene.start("splashScene")
+
 
