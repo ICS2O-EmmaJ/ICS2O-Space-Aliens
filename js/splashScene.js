@@ -23,6 +23,8 @@ class SplashScene extends Phaser.Scene {
     console.log("Splash Scene")
     // importing image of the Immaculata Crest
     this.load.image('splashSceneBackground', './images/immaculatacrest.jpeg')
+    // loading the background music
+    this.load.audio('backgroundMusic', './sounds/backgroundmusic.mp3')
   }
 
   // setting coordinates, location and scale of Immaculata crest
@@ -30,6 +32,7 @@ class SplashScene extends Phaser.Scene {
     this.splashSceneBackgroundImage = this.add.sprite(0, 0, 'splashSceneBackground').setScale(2)
     this.splashSceneBackgroundImage.x = 1920 / 2
     this.splashSceneBackgroundImage.y = 1080 / 2
+    this.sound.play('backgroundMusic')
   }
 
   // the amount of time the splash scene stays on screen (3.5 seconds)

@@ -67,8 +67,6 @@ class LevelTwoScene extends Phaser.Scene {
     this.load.audio('hiss', './sounds/hisssound.wav')
     // loading the sound effect for when the mermaid is hit by the seamonster
     this.load.audio('lose', './sounds/losesound.wav')
-    // loading the sound effect for when the game is over
-    this.load.audio('gameOver', './sounds/gameoversound.wav')
   }
 
   create (data) {
@@ -119,7 +117,6 @@ class LevelTwoScene extends Phaser.Scene {
       this.createSeamonster()
       // if statement to have game over text appear after 3 lives have been lost
       if (this.lives <= 0) {
-        this.sound.play('gameOver')
         mermaidCollide.destroy()
         // switching to second game over scene 
         this.scene.start('secondGameOverScene')
@@ -158,6 +155,7 @@ class LevelTwoScene extends Phaser.Scene {
         // mermaid wraps around
         this.mermaid.x = 1920
       }
+      // mermaid rotates horizontally when switching directions
       this.mermaid.flipX = true
     }
 
@@ -168,6 +166,7 @@ class LevelTwoScene extends Phaser.Scene {
         // mermaid wraps around
         this.mermaid.x = 0
       }
+      // mermaid rotates horizontally when switching directions
       this.mermaid.flipX = false
     }
 

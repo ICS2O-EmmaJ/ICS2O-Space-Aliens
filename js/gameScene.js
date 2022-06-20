@@ -67,8 +67,6 @@ class GameScene extends Phaser.Scene {
     this.load.audio('growl', './sounds/growlsound.wav')
     // loading the sound effect for when the mermaid is hit by the shark
     this.load.audio('lose', './sounds/losesound.wav')
-    // loading the sound effect for when the game is over
-    this.load.audio('gameOver', './sounds/gameoversound.wav')
   }
 
   create (data) {
@@ -118,7 +116,6 @@ class GameScene extends Phaser.Scene {
       this.createShark()
       // if statement to have game over text appear after 3 lives have been lost
       if (this.lives <= 0) {
-        this.sound.play('gameOver')
         mermaidCollide.destroy()
         // switching to game over scene 
         this.scene.start('gameOverScene')
@@ -157,6 +154,7 @@ class GameScene extends Phaser.Scene {
         // mermaid wraps around
         this.mermaid.x = 1920
       }
+      // mermaid rotates horizontally when switching directions
       this.mermaid.flipX = true
     }
 
@@ -167,6 +165,7 @@ class GameScene extends Phaser.Scene {
         // mermaid wraps around
         this.mermaid.x = 0
       }
+      // mermaid rotates horizontally when switching directions
       this.mermaid.flipX = false
     }
 

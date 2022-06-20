@@ -18,7 +18,7 @@ class InstructionScene extends Phaser.Scene {
     this.forwardButton = null
     // creating a variable to hold the instruction text
     this.instructionSceneText = null
-    // setting the style of the instruction text to 200px, centred and in the color white
+    // setting the style of the instruction text to 200px, centred and in the color black
     this.instructionSceneTextStyle = { font: '200px Times', fill: '#000000', align: 'center' }
   }
 
